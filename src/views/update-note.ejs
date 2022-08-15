@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+<div class="todo__container">
+    <form action="/" method="post">
+        <input name="content" type="text">
+        <button class="create__note___btn" type="submit"><i class="fa fa-plus"></i></button>
+    </form>
+    <div>
+        <ul class="todo__list">
+
+            <% notes.forEach((note) => { %>
+                <% if(note.id === currentNoteId) { %>
+                <div class="update__block">
+                    <form action="/update-note/<%= note.id %>" method="post">
+                        <div class="update__form">
+                            <input value="<%= note.content %>" name="content" type="text">
+                            <div class="update__actions">
+                                <button type="submit"><i class="fa fa-check update__button"></i></button>
+                                <a href="/"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <% } else { %>
+                    <li class="note__element">
+                        <div class="note__block">
+                            <div class="note__content">
+                                <%= note.content %>
+                            </div>
+                            <div class="note__actions">
+                                <a href="/update-note/<%= note.id %>"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                <a href="/delete-note/<%= note.id %>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </li>
+            <% }}) %>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
